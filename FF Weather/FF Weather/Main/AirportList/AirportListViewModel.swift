@@ -11,14 +11,20 @@ class AirportListViewModel: ObservableObject {
 	
 	// MARK: - Properties
 	
-	@Published var airports: [Airport] = [.preview]
-	@Published var selection: Set<UUID> = .init()
+	@Published var airports: [Airport] = [Airport(id: "kpwm"), Airport(id: "kaus")]
+	@Published var inputText: String = ""
 	
 	// MARK: - Init
 	
+	// MARK: - Actions
+	func deleteItem(at offsets: IndexSet) {
+		airports.remove(atOffsets: offsets)
+	}
+	
 	// MARK: - Helpers
+	
 	@MainActor func getAirport() async {
-		guard let url = URL(string: "https://qa.foreflight.com/weather/report/kpwm") else { fatalError("URL failed") }
+		guard let url = URL(string: "https://qa.foreflight.com/weather/report/\(inputText)") else { fatalError("URL failed, identifier: \(inputText)") }
 		var urlRequest = URLRequest(url: url)
 		urlRequest.addValue("1", forHTTPHeaderField: "ff-coding-exercise")
 		
@@ -29,6 +35,8 @@ class AirportListViewModel: ObservableObject {
 			let decoded = try decoder.decode(ReportDTO.self, from: data)
 			print(response)
 			print(decoded)
+			let airport = Airport(report: decoded)
+			airports.append(airport)
 		} catch {
 			print(error)
 		}

@@ -12,20 +12,21 @@ struct AirportListView: View {
 	
 	@StateObject var viewModel: AirportListViewModel = .init()
 	
-	@State private var presentedAirports: [Airport] = []
-
     var body: some View {
 		NavigationStack {
-			List(viewModel.airports, selection: $viewModel.selection) { airport in
-				VStack(alignment: .leading) {
-					Text(airport.id.uppercased())
-										
-					Text("Last updated: \(airport.dateIssued.formatted(date: .abbreviated, time: .shortened))")
+			List {
+				ForEach($viewModel.airports) { airport in
+					AirportItemView(airport: airport)
 				}
+				.onDelete(perform: viewModel.deleteItem)
+			}
+			.safeAreaInset(edge: .bottom, spacing: 0) {
+				AirportInputView(viewModel: viewModel)
 			}
 			.navigationTitle("Airports")
-		}.task {
-			await viewModel.getAirport()
+			.toolbar {
+				EditButton()
+			}
 		}
     }
 }

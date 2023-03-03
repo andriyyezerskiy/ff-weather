@@ -22,6 +22,11 @@
 		D12E9DBC29AB664D001B1708 /* Airport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12E9DB429AB664D001B1708 /* Airport.swift */; };
 		D12E9DC029AB66F6001B1708 /* AirportListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12E9DBE29AB66F6001B1708 /* AirportListViewModel.swift */; };
 		D12E9DC129AB66F6001B1708 /* AirportListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12E9DBF29AB66F6001B1708 /* AirportListView.swift */; };
+		D12E9DD229B275DA001B1708 /* AirportInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12E9DD129B275DA001B1708 /* AirportInputView.swift */; };
+		D12E9DD429B27601001B1708 /* AirportItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12E9DD329B27601001B1708 /* AirportItemView.swift */; };
+		D12E9DD629B27794001B1708 /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12E9DD529B27794001B1708 /* AppTextField.swift */; };
+		D12E9DDB29B28665001B1708 /* CharacterSet+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12E9DDA29B28665001B1708 /* CharacterSet+Extensions.swift */; };
+		D12E9DDD29B28734001B1708 /* AirportStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12E9DDC29B28734001B1708 /* AirportStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +46,12 @@
 		D12E9DB429AB664D001B1708 /* Airport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Airport.swift; sourceTree = "<group>"; };
 		D12E9DBE29AB66F6001B1708 /* AirportListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirportListViewModel.swift; sourceTree = "<group>"; };
 		D12E9DBF29AB66F6001B1708 /* AirportListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirportListView.swift; sourceTree = "<group>"; };
+		D12E9DD129B275DA001B1708 /* AirportInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportInputView.swift; sourceTree = "<group>"; };
+		D12E9DD329B27601001B1708 /* AirportItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportItemView.swift; sourceTree = "<group>"; };
+		D12E9DD529B27794001B1708 /* AppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTextField.swift; sourceTree = "<group>"; };
+		D12E9DD829B27E73001B1708 /* FF-Weather-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FF-Weather-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D12E9DDA29B28665001B1708 /* CharacterSet+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterSet+Extensions.swift"; sourceTree = "<group>"; };
+		D12E9DDC29B28734001B1708 /* AirportStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,9 +84,12 @@
 		D12E9D8129A8DE10001B1708 /* FF Weather */ = {
 			isa = PBXGroup;
 			children = (
+				D12E9DD829B27E73001B1708 /* FF-Weather-Info.plist */,
 				D12E9D9C29A957EA001B1708 /* Main */,
 				D12E9DAC29AB6615001B1708 /* Models */,
 				D12E9D9A29A957C1001B1708 /* CoreData */,
+				D12E9DD929B2864D001B1708 /* Supporting Files */,
+				D12E9DD729B27D73001B1708 /* Supporting Views */,
 				D12E9D9B29A957D6001B1708 /* Resources */,
 				D12E9D8829A8DE12001B1708 /* Preview Content */,
 			);
@@ -94,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				D12E9D8D29A8DE12001B1708 /* FF_Weather.xcdatamodeld */,
+				D12E9DDC29B28734001B1708 /* AirportStorage.swift */,
 				D12E9D8B29A8DE12001B1708 /* Persistence.swift */,
 			);
 			path = CoreData;
@@ -131,6 +146,7 @@
 			children = (
 				D12E9DBF29AB66F6001B1708 /* AirportListView.swift */,
 				D12E9DBE29AB66F6001B1708 /* AirportListViewModel.swift */,
+				D12E9DD029B275C3001B1708 /* Subviews */,
 			);
 			path = AirportList;
 			sourceTree = "<group>";
@@ -154,6 +170,31 @@
 				D12E9DB229AB664D001B1708 /* PeriodDTO.swift */,
 			);
 			path = DTO;
+			sourceTree = "<group>";
+		};
+		D12E9DD029B275C3001B1708 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				D12E9DD329B27601001B1708 /* AirportItemView.swift */,
+				D12E9DD129B275DA001B1708 /* AirportInputView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		D12E9DD729B27D73001B1708 /* Supporting Views */ = {
+			isa = PBXGroup;
+			children = (
+				D12E9DD529B27794001B1708 /* AppTextField.swift */,
+			);
+			path = "Supporting Views";
+			sourceTree = "<group>";
+		};
+		D12E9DD929B2864D001B1708 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D12E9DDA29B28665001B1708 /* CharacterSet+Extensions.swift */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D12E9DD629B27794001B1708 /* AppTextField.swift in Sources */,
 				D12E9DB829AB664D001B1708 /* CloudLayersDTO.swift in Sources */,
 				D12E9DBC29AB664D001B1708 /* Airport.swift in Sources */,
 				D12E9DBB29AB664D001B1708 /* WindDTO.swift in Sources */,
@@ -234,9 +276,13 @@
 				D12E9DB929AB664D001B1708 /* VisibilityDTO.swift in Sources */,
 				D12E9DBA29AB664D001B1708 /* PeriodDTO.swift in Sources */,
 				D12E9DC029AB66F6001B1708 /* AirportListViewModel.swift in Sources */,
+				D12E9DD429B27601001B1708 /* AirportItemView.swift in Sources */,
 				D12E9D8F29A8DE12001B1708 /* FF_Weather.xcdatamodeld in Sources */,
 				D12E9D8329A8DE10001B1708 /* FF_WeatherApp.swift in Sources */,
 				D12E9DB629AB664D001B1708 /* ForecastDTO.swift in Sources */,
+				D12E9DD229B275DA001B1708 /* AirportInputView.swift in Sources */,
+				D12E9DDB29B28665001B1708 /* CharacterSet+Extensions.swift in Sources */,
+				D12E9DDD29B28734001B1708 /* AirportStorage.swift in Sources */,
 				D12E9DC129AB66F6001B1708 /* AirportListView.swift in Sources */,
 				D12E9DB729AB664D001B1708 /* ReportDTO.swift in Sources */,
 			);
@@ -370,7 +416,7 @@
 				DEVELOPMENT_TEAM = 4K2L2D8575;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = "FF-Weather-Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -399,7 +445,7 @@
 				DEVELOPMENT_TEAM = 4K2L2D8575;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = "FF-Weather-Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

@@ -11,16 +11,16 @@ struct Airport: Identifiable, Hashable {
 	
 	// MARK: - Properties
 	let id: String
-	let dateIssued: Date
-	let dateCached: Date
-	let latitude: Double
-	let longitude: Double
-	let temperatureCelsius: Double
-	let dewpointCelcius: Double
+	let dateIssued: Date?
+	let dateCached: Date?
+	let latitude: Double?
+	let longitude: Double?
+	let temperatureCelsius: Double?
+	let dewpointCelcius: Double?
 	var weather: [String]
 	
 	// MARK: - Init
-	init(id: String, dateIssued: Date, dateCached: Date, latitude: Double, longitude: Double, temperatureCelsius: Double, dewpointCelcius: Double, weather: [String]) {
+	init(id: String, dateIssued: Date? = nil, dateCached: Date? = nil, latitude: Double? = nil, longitude: Double? = nil, temperatureCelsius: Double? = nil, dewpointCelcius: Double? = nil, weather: [String] = []) {
 		self.id = id
 		self.dateIssued = dateIssued
 		self.dateCached = dateCached
@@ -43,6 +43,11 @@ struct Airport: Identifiable, Hashable {
 	}
 
 	// MARK: - Computed Properties
+	var hasData: Bool {
+		([dateIssued, latitude, longitude, temperatureCelsius, dewpointCelcius] as [Any?]).allSatisfy { property in
+			property != nil
+		}
+	}
 }
 
 extension Airport {

@@ -27,7 +27,7 @@ struct ForecastDTO: Decodable {
 		let flightRules: String
 		let cloudLayersV2: [CloudLayersDTO]
 		let visibility: VisibilityDTO
-		let wind: WindDTO
+		let wind: WindDTO?
 		let period: PeriodDTO
 		let weather: [String]
 	}

@@ -1,5 +1,5 @@
 //
-//  Forecast.swift
+//  ForecastDTO.swift
 //  FF Weather
 //
 //  Created by Andriy Yezerskiy on 26/02/2023.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct Forecast: Decodable {
+struct ForecastDTO: Decodable {
 	let text: String
 	let ident: String
 	let dateIssued: Date
-	let period: Period
+	let period: PeriodDTO
 	let lat: Double
 	let lon: Double
 	let elevationFt: Double
@@ -25,9 +25,10 @@ struct Forecast: Decodable {
 		let elevationFt: Double
 		let relativeHumidity: Double
 		let flightRules: String
-		let cloudLayersV2: [CloudLayer]
-		let visibility: Visibility
-		let wind: Wind
-		let period: Period
+		let cloudLayersV2: [CloudLayersDTO]
+		let visibility: VisibilityDTO
+		let wind: WindDTO
+		let period: PeriodDTO
+		let weather: [String]
 	}
 }

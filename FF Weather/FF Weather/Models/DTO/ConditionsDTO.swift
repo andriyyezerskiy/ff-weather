@@ -1,5 +1,5 @@
 //
-//  Conditions.swift
+//  ConditionsDTO.swift
 //  FF Weather
 //
 //  Created by Andriy Yezerskiy on 26/02/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Conditions: Decodable {
+struct ConditionsDTO: Decodable {
 	let text: String
 	let ident: String
 	let dateIssued: Date
@@ -18,11 +18,12 @@ struct Conditions: Decodable {
 	let dewpointC: Double
 	let pressureHg: Double
 	let pressureHpa: Double
-	let reportAsHpa: Bool
+	let reportedAsHpa: Bool
 	let densityAltitudeFt: Double
 	let relativeHumidity: Double
 	let flightRules: String
-	let cloudLayersV2: [CloudLayer]
-	let visibility: Visibility
-	let wind: Wind
+	let cloudLayersV2: [CloudLayersDTO]
+	let visibility: VisibilityDTO
+	let wind: WindDTO
+	let weather: [String]
 }

@@ -11,13 +11,21 @@ import CoreData
 struct AirportListView: View {
 	
 	@StateObject var viewModel: AirportListViewModel = .init()
+	
+	@State private var presentedAirports: [Airport] = []
 
     var body: some View {
 		NavigationStack {
-			List(viewModel.airports, selection: $viewModel.selection) { location in
-				Text(location.identifierCode.uppercased())
+			List(viewModel.airports, selection: $viewModel.selection) { airport in
+				VStack(alignment: .leading) {
+					Text(airport.id.uppercased())
+										
+					Text("Last updated: \(airport.dateIssued.formatted(date: .abbreviated, time: .shortened))")
+				}
 			}
 			.navigationTitle("Airports")
+		}.task {
+			await viewModel.getAirport()
 		}
     }
 }

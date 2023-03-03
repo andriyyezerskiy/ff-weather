@@ -12,7 +12,7 @@ struct FF_WeatherApp: App {
 
     var body: some Scene {
         WindowGroup {
-			Text("")
+			AirportListView()
         }
     }
 }

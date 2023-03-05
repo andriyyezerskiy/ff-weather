@@ -6,26 +6,49 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct AirportListView: View {
 	
 	@StateObject var viewModel: AirportListViewModel = .init()
 	
-	@State private var presentedAirports: [Airport] = []
-
+	// Timer with 15 minute interval
+	let timer = Timer.publish(every: 900, on: .main, in: .common).autoconnect()
+	
     var body: some View {
-		NavigationStack {
-			List(viewModel.airports, selection: $viewModel.selection) { airport in
-				VStack(alignment: .leading) {
-					Text(airport.id.uppercased())
-										
-					Text("Last updated: \(airport.dateIssued.formatted(date: .abbreviated, time: .shortened))")
+		NavigationStack(path: $viewModel.path) {
+			List {
+				ForEach(viewModel.airports) { airport in
+					NavigationLink(value: airport) {
+						AirportItemView(airport: airport)
+					}
+				}
+				.onDelete(perform: { offset in
+					viewModel.deleteItem(at: offset)
+				})
+				.onReceive(timer) { _ in
+					Task {
+						await viewModel.refetchExisting()
+					}
 				}
 			}
+			.safeAreaInset(edge: .bottom, spacing: 0) {
+				AirportInputView(viewModel: viewModel)
+			}
+			.toolbar {
+				EditButton()
+			}
+			
 			.navigationTitle("Airports")
-		}.task {
-			await viewModel.getAirport()
+			.navigationDestination(for: Airport.self) { airport in
+				let viewModel = AirportDetailsViewModel(airport: airport)
+				AirportDetailsView(viewModel: viewModel)
+			}
+			.onChange(of: viewModel.path) { _ in
+				// Dirty fix to prevent safe area inset view from retaining offset y position when keyboard is displayed and navigation link is presented.
+				// Possibly a SwiftUI bug
+				// Could be improved with FocusState implementation for TextField
+				UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+			}
 		}
     }
 }

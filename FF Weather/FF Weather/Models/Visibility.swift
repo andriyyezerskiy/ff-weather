@@ -1,5 +1,5 @@
 //
-//  VisibilityDTO.swift
+//  Visibility.swift
 //  FF Weather
 //
 //  Created by Andriy Yezerskiy on 26/02/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct VisibilityDTO: Decodable {
+struct Visibility: Decodable, Hashable {
 	let distanceSm: Double
 	let distanceQualifier: Int?
 	let prevailingVisSm: Double

@@ -1,5 +1,5 @@
 //
-//  ReportDTO.swift
+//  Report.swift
 //  FF Weather
 //
 //  Created by Andriy Yezerskiy on 26/02/2023.
@@ -7,10 +7,11 @@
 
 import Foundation
 
-struct ReportDTO: Decodable {
+struct Report: Decodable, Hashable {
+	
 	// MARK: - Properties
-	let conditions: ConditionsDTO
-	let forecast: ForecastDTO
+	let conditions: Conditions
+	let forecast: Forecast
 	
 	// MARK: - Coding Keys
 	enum CodingKeys: CodingKey {
@@ -29,7 +30,12 @@ struct ReportDTO: Decodable {
 
 		let report = try container.nestedContainer(keyedBy: ReportKeys.self, forKey: .report)
 		
-		self.conditions = try report.decode(ConditionsDTO.self, forKey: .conditions)
-		self.forecast = try report.decode(ForecastDTO.self, forKey: .forecast)
+		self.conditions = try report.decode(Conditions.self, forKey: .conditions)
+		self.forecast = try report.decode(Forecast.self, forKey: .forecast)
+	}
+	
+	init(conditions: Conditions, forecast: Forecast) {
+		self.conditions = conditions
+		self.forecast = forecast
 	}
 }

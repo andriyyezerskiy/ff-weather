@@ -12,28 +12,33 @@ struct AirportInputView: View {
 	@ObservedObject var viewModel: AirportListViewModel
 	
 	var body: some View {
-		HStack {
-			AppTextField(placeholder: "Airport Identifier ex: KPWM", inputText: $viewModel.inputText)
-				.onChange(of: viewModel.inputText) { newValue in
-					sanitizeAndFormat(identifier: newValue)
+		VStack(alignment: .leading) {
+			HStack {
+				AppTextField(placeholder: "Airport Identifier ex: KPWM", inputText: $viewModel.inputText)
+					.onChange(of: viewModel.inputText) { newValue in
+						viewModel.sanitizeAndFormat(identifier: newValue)
+						viewModel.nullifyError()
+					}
+				
+				Button("Add") {
+					Task {
+						await viewModel.getAirportReportFromInput()
+					}
 				}
-			
-			Button("Add") {
-				Task {
-					await viewModel.getAirport()
-				}
+				.buttonStyle(.borderedProminent)
 			}
-			.buttonStyle(.borderedProminent)
+			.animation(.easeInOut, value: viewModel.inputText)
+			
+			if let errorMessage = viewModel.errorMessage {
+				Text(errorMessage)
+					.font(.caption)
+					.foregroundColor(.red)
+			}
 		}
 		.padding(.all)
 		.background(Color.white)
+		.animation(.easeInOut, value: viewModel.errorMessage)
 	}
 	
-	// Assuming all identifiers consist of letters and max 4 characters
-	private func sanitizeAndFormat(identifier: String) {
-		let maxLenght = 4
-		let allowedCharacterSet: CharacterSet = .letters
-		
-		viewModel.inputText = String(identifier.unicodeScalars.filter { allowedCharacterSet.contains($0)}).prefix(maxLenght).uppercased()
-	}
+	
 }

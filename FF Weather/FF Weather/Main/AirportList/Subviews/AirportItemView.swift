@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AirportItemView: View {
 	
-	@Binding var airport: Airport
+	var airport: Airport
 	
 	var body: some View {
 		VStack(alignment: .leading) {
@@ -20,6 +20,6 @@ struct AirportItemView: View {
 
 struct AirportItemView_Previews: PreviewProvider {
     static var previews: some View {
-		AirportItemView(airport: .constant(.preview))
+		AirportItemView(airport: .preview)
     }
 }

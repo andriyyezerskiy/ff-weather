@@ -15,18 +15,12 @@ final class AirportStorage: ObservableObject {
 	static let shared = AirportStorage()
 	
 	// MARK: - Properties
-	private let persistence: Persistence
+	private let persistence: Persistence = .shared
 	
 	@Published var persistentAirports: [PersistentAirport] = []
 	
 	// MARK: - Init
-	init(isPreview: Bool = false) {
-		if isPreview {
-			self.persistence = Persistence.preview
-		} else {
-			self.persistence = Persistence.shared
-		}
-		
+	init() {
 		Task {
 			await fetch()
 		}
@@ -43,14 +37,22 @@ final class AirportStorage: ObservableObject {
 		}
 	}
 	
-	func add(airport: Airport) async {
-		let persistentAirport = PersistentAirport(context: persistence.persistentContainer.viewContext)
-		persistentAirport.id = airport.id
+	// Ran low on time so saving data instead of mapped entities and attributes for each model
+	func add(id: String, report: Data) async {
+		if let existingObject = persistentAirports.first(where: {$0.id == id}) {
+			existingObject.report = report
+		} else {
+			let persistentAirport = PersistentAirport(context: persistence.persistentContainer.viewContext)
+			persistentAirport.id = id
+			persistentAirport.report = report
+		}
 		
 		await syncChanges()
 	}
 	
 	func delete(with id: String) async {
+		guard let objectToDelete = persistentAirports.first(where: {$0.id == id}) else { return }
+		persistence.persistentContainer.viewContext.delete(objectToDelete)
 		await syncChanges()
 	}
 	
